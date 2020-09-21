@@ -103,4 +103,4 @@ def text_to_excel():
 for x in range(3):
     telnet()
 cuttext()
-#text_to_excel()
+text_to_excel()
