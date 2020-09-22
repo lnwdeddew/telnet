@@ -45,7 +45,7 @@ def cuttext():
     f.write(string_without_empty_lines)
     f.close()
 
-def text_to_excel():
+def survey(m1):
     file = open('wiviz.txt', 'r')
     names = []
     mac = []
@@ -58,12 +58,16 @@ def text_to_excel():
         cut_mac1 = names[i].replace(';', '')
         cut_mac2 = cut_mac1.replace('h.mac = ', '')
         if result_mac == True:
+            test = m1 in cut_mac2
+            if test == True:
+                print(cut_mac2)
             mac.append(cut_mac2)
         #----rssi----
         result_rssi = 'h.rssi' in names[i]
         cut_rssi1 = names[i].replace(';', '')
         cut_rssi2 = cut_rssi1.replace('h.rssi = ', '')
-        if result_rssi == True:
+        if result_rssi == True and test == True:
+            print(cut_rssi2)
             rssi.append(int(cut_rssi2))
         #----type----
         result_types = 'h.type' in names[i]
@@ -73,7 +77,7 @@ def text_to_excel():
             types.append(cut_types2)
     #print(names)
 
-    workbook = xlsxwriter.Workbook('dataset.xlsx') 
+    '''workbook = xlsxwriter.Workbook('dataset.xlsx') 
     worksheet = workbook.add_worksheet() 
     row_rssi = 0
     column_rssi = 0
@@ -94,13 +98,13 @@ def text_to_excel():
     for item in content_types :
         worksheet.write(row_types, column_types, item)
         row_types += 1
-    workbook.close() 
+    workbook.close() '''
 
     #print(rssi)
     file.close()
 
 
-for x in range(3):
-    telnet()
-cuttext()
-text_to_excel()
+
+#telnet()
+#cuttext()
+survey('14:4D:67:23:4C:4C')
