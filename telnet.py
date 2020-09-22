@@ -2,7 +2,6 @@ import getpass
 import telnetlib
 import re
 import csv
-import xlsxwriter 
 
 
 def telnet():
