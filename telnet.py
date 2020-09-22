@@ -104,6 +104,6 @@ def survey(m1):
 
 
 
-#telnet()
-#cuttext()
+telnet()
+cuttext()
 survey('14:4D:67:23:4C:4C')
