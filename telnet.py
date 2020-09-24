@@ -2,6 +2,12 @@ import getpass
 import telnetlib
 import re
 import csv
+import paho.mqtt.publish as publish
+import psutil
+import time
+import uuid
+hotsname = "localhost"
+port = 1883
 
 
 def telnet():
@@ -60,6 +66,7 @@ def survey(m1):
             test = m1 in cut_mac2
             if test == True:
                 print(cut_mac2)
+                publish.single(topic="test",payload=cut_mac2,qos=1,hostname=hotsname,port=port)
             mac.append(cut_mac2)
         #----rssi----
         result_rssi = 'h.rssi' in names[i]
