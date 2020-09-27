@@ -6,8 +6,9 @@ import paho.mqtt.publish as publish
 import psutil
 import time
 import uuid
-hotsname = "localhost"
+hotsname = "172.16.20.12"
 port = 1883
+ap = "1"
 
 
 def telnet():
@@ -66,7 +67,7 @@ def survey(m1):
             test = m1 in cut_mac2
             if test == True:
                 print(cut_mac2)
-                publish.single(topic="test",payload=cut_mac2,qos=1,hostname=hotsname,port=port)
+                publish.single(topic="fx80a",payload=str(cut_mac2)+","+str(ap),qos=1,hostname=hotsname,port=port)
             mac.append(cut_mac2)
         #----rssi----
         result_rssi = 'h.rssi' in names[i]
@@ -83,34 +84,8 @@ def survey(m1):
             types.append(cut_types2)
     #print(names)
 
-    '''workbook = xlsxwriter.Workbook('dataset.xlsx') 
-    worksheet = workbook.add_worksheet() 
-    row_rssi = 0
-    column_rssi = 0
-    row_mac = 0
-    column_mac = 1
-    row_types = 0
-    column_types = 2
-
-    content_rssi = rssi
-    content_mac = mac
-    content_types = types
-    for item in content_rssi :
-        worksheet.write(row_rssi, column_rssi, item)
-        row_rssi += 1
-    for item in content_mac :
-        worksheet.write(row_mac, column_mac, item)
-        row_mac += 1
-    for item in content_types :
-        worksheet.write(row_types, column_types, item)
-        row_types += 1
-    workbook.close() '''
-
-    #print(rssi)
-    file.close()
-
 
 
 telnet()
 cuttext()
-survey('14:4D:67:23:4C:4C')
+survey('E0:DD:C0:F8:2B:C7')
