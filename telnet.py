@@ -7,7 +7,7 @@ import paho.mqtt.client as mqtt
 import psutil
 import time
 import uuid
-hotsname = "172.16.20.12"
+hostname = "172.16.20.12"
 port = 1883
 ap = "1"
 
@@ -68,7 +68,7 @@ def survey(m1):
             test = m1 in cut_mac2
             if test == True:
                 print(cut_mac2)
-                publish.single(topic="fx80a",payload=str(cut_mac2)+","+str(ap),qos=1,hostname=hotsname,port=port)
+                publish.single(topic="fx80a",payload=str(cut_mac2)+","+str(ap),qos=1,hostname=hostname,port=port)
             mac.append(cut_mac2)
         #----rssi----
         result_rssi = 'h.rssi' in names[i]
@@ -97,14 +97,14 @@ def message_test(client,userdata,message):
         for x in range(data2):
             telnet()
             cuttext()
-            survey('E0:DD:C0:F8:2B:C7')
+            survey(data1)
         print(message.payload.decode())
         print(info)
         client.disconnect()
 
 
 client = mqtt.Client()
-client.connect(hotsname,port)
+client.connect(hostname,port)
 client.subscribe("survey",qos=1)
 client.message_callback_add("survey",message_test)
 client.loop_forever()
