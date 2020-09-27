@@ -68,7 +68,6 @@ def survey(m1):
             test = m1 in cut_mac2
             if test == True:
                 print(cut_mac2)
-                publish.single(topic="fx80a",payload=str(cut_mac2)+","+str(ap),qos=1,hostname=hostname,port=port)
             mac.append(cut_mac2)
         #----rssi----
         result_rssi = 'h.rssi' in names[i]
@@ -76,6 +75,7 @@ def survey(m1):
         cut_rssi2 = cut_rssi1.replace('h.rssi = ', '')
         if result_rssi == True and test == True:
             print(cut_rssi2)
+            publish.single(topic="fx80a",payload=str(cut_rssi2)+","+str(ap),qos=1,hostname=hostname,port=port)
             rssi.append(int(cut_rssi2))
         #----type----
         result_types = 'h.type' in names[i]
