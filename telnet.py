@@ -3,6 +3,7 @@ import telnetlib
 import re
 import csv
 import paho.mqtt.publish as publish
+import paho.mqtt.client as mqtt
 import psutil
 import time
 import uuid
@@ -86,6 +87,24 @@ def survey(m1):
 
 
 
-telnet()
-cuttext()
-survey('E0:DD:C0:F8:2B:C7')
+
+def message_test(client,userdata,message):
+    if message:
+        info = message.payload.decode().split(",")
+        data1 = str(info[0])
+        data2 = int(info[1])
+        val = (message.payload.decode())
+        for x in range(data2):
+            telnet()
+            cuttext()
+            survey('E0:DD:C0:F8:2B:C7')
+        print(message.payload.decode())
+        print(info)
+        client.disconnect()
+
+
+client = mqtt.Client()
+client.connect(hotsname,port)
+client.subscribe("survey",qos=1)
+client.message_callback_add("survey",message_test)
+client.loop_forever()
